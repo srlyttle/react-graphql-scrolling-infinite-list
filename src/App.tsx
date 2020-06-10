@@ -1,24 +1,77 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useQuery } from '@apollo/react-hooks';
+import Repositories from './components/repositories';
+import {
+  TRENDING_REPOSITORIES,
+  filterRepositories,
+} from './apollo-client/queries/trendingRespositories';
+import { ApolloError } from 'apollo-boost';
+import { SearchData } from './models/common';
 
 function App() {
+  const {
+    loading,
+    error,
+    data,
+    fetchMore,
+    networkStatus,
+  }: {
+    loading: boolean;
+    error?: ApolloError;
+    data?: SearchData;
+    fetchMore: Function;
+    networkStatus: number;
+  } = useQuery(TRENDING_REPOSITORIES, {
+    variables: { query: filterRepositories },
+    notifyOnNetworkStatusChange: true,
+  });
+
+  if (loading) return <p>Loading data...</p>;
+  if (error) return <p>Error :(</p>;
+  const repos = data && data.search ? data.search.edges : [];
+
+  const transformedRepos = repos.map((raw: any) => {
+    const { node } = raw;
+    return { ...node };
+  });
+
+  const onLoadMore = () => {
+    return fetchMore({
+      variables: {
+        variables: { query: filterRepositories },
+        cursor: data && data.search ? data.search.pageInfo.endCursor : null,
+      },
+      updateQuery: (
+        prevResult: any,
+        { fetchMoreResult }: { fetchMoreResult?: any }
+      ) => {
+        if (!fetchMoreResult) {
+          return prevResult;
+        }
+
+        const newEdges = fetchMoreResult.search.edges;
+        const pageInfo = fetchMoreResult.search.pageInfo;
+        return newEdges.length
+          ? {
+              search: {
+                __typename: prevResult.search.__typename,
+                edges: [...prevResult.search.edges, ...newEdges],
+                pageInfo,
+              },
+            }
+          : prevResult;
+      },
+    });
+  };
+  // console.log('data', data);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Repositories
+        repos={transformedRepos}
+        loading={loading}
+        loadMoreRepos={onLoadMore}
+      />
+      {networkStatus === 3 && <div>loading more repos ......</div>}
     </div>
   );
 }
