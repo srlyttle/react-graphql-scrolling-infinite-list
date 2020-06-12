@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Repositories is rendered correctly 1`] = `
+<div>
+  <ul
+    class="repository-list"
+  >
+    <div>
+      <li>
+        <div
+          class="ant-card ant-card-bordered"
+        >
+          <div
+            class="ant-card-head"
+          >
+            <div
+              class="ant-card-head-wrapper"
+            >
+              <div
+                class="ant-card-head-title"
+              >
+                genetic-drawing - anopara
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <div
+              class="ant-card ant-card-bordered ant-card-type-inner"
+            >
+              <div
+                class="ant-card-head"
+              >
+                <div
+                  class="ant-card-head-wrapper"
+                >
+                  <div
+                    class="ant-card-head-title"
+                  >
+                    A genetic algorithm toy project for drawing
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-card-body"
+              >
+                Python
+              </div>
+            </div>
+            <div
+              class="ant-card ant-card-bordered ant-card-type-inner"
+              style="margin-top: 16px;"
+            >
+              <div
+                class="ant-card-head"
+              >
+                <div
+                  class="ant-card-head-wrapper"
+                >
+                  <div
+                    class="ant-card-head-title"
+                  >
+                    Stars
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-card-body"
+              >
+                1286
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </div>
+    <div>
+      <li>
+        <div
+          class="ant-card ant-card-bordered"
+        >
+          <div
+            class="ant-card-head"
+          >
+            <div
+              class="ant-card-head-wrapper"
+            >
+              <div
+                class="ant-card-head-title"
+              >
+                "xgenecloud" - xgenecloud
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <div
+              class="ant-card ant-card-bordered ant-card-type-inner"
+            >
+              <div
+                class="ant-card-head"
+              >
+                <div
+                  class="ant-card-head-wrapper"
+                >
+                  <div
+                    class="ant-card-head-title"
+                  >
+                    fire: :fire: Instantly generate REST & GraphQL APIs on any Database 
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-card-body"
+              >
+                JavaScript
+              </div>
+            </div>
+            <div
+              class="ant-card ant-card-bordered ant-card-type-inner"
+              style="margin-top: 16px;"
+            >
+              <div
+                class="ant-card-head"
+              >
+                <div
+                  class="ant-card-head-wrapper"
+                >
+                  <div
+                    class="ant-card-head-title"
+                  >
+                    Stars
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-card-body"
+              >
+                597
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </div>
+  </ul>
+</div>
+`;

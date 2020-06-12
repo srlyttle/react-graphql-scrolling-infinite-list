@@ -7,9 +7,12 @@ export interface Repository {
 }
 
 export interface RepositoriesProps {
-  loading: boolean;
-  repos: Repository[];
+  repos: RepositoryDetails[];
   loadMoreRepos: Function;
+}
+
+export interface RepositoryItemProps {
+  repositoryDetails: RepositoryDetails;
 }
 
 export interface SearchData {

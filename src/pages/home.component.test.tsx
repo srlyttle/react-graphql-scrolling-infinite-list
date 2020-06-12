@@ -1,13 +1,25 @@
 import React from 'react';
-import App from './App';
+import Home from './home.component';
 import {
   TRENDING_REPOSITORIES,
   filterRepositories,
-} from './apollo-client/queries/trendingRespositories';
+} from '../apollo-client/queries/trendingRespositories';
 import { MockedProvider } from '@apollo/react-testing';
-import { SearchData, RepositoryDetails } from './models/common';
+import { SearchData, RepositoryDetails } from '../models/common';
 import { act, render } from '@testing-library/react';
-
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
 const nodeData: RepositoryDetails = {
   name: 'genetic-drawing',
   owner: { login: 'anopara', __typename: 'User' },
@@ -16,11 +28,26 @@ const nodeData: RepositoryDetails = {
   primaryLanguage: { name: 'Python', __typename: 'Language' },
   __typename: 'Repository',
 };
+
+const nodeData2: RepositoryDetails = {
+  name: '"xgenecloud"',
+  owner: { login: 'xgenecloud', __typename: 'Organization' },
+  description:
+    'fire: :fire: Instantly generate REST & GraphQL APIs on any Database ',
+  stargazers: { totalCount: 597, __typename: 'StargazerConnection' },
+  primaryLanguage: { name: 'JavaScript', __typename: 'Language' },
+  __typename: 'Repository',
+};
+
 const mockData: SearchData = {
   search: {
     edges: [
       {
         node: nodeData,
+        __typename: 'SearchResultItemEdge',
+      },
+      {
+        node: nodeData2,
         __typename: 'SearchResultItemEdge',
       },
     ],
@@ -57,15 +84,17 @@ async function wait(ms = 0) {
 
 it('renders without error and shows loading indicator', async () => {
   const { container } = render(
-    <MockedProvider addTypename={false} mocks={MOCKS}>
-      <App />
+    <MockedProvider addTypename={true} mocks={MOCKS}>
+      <Home />
     </MockedProvider>
   );
   expect(container.textContent).toBe('Loading data...');
 
   await wait();
 
-  expect(container.textContent).toMatch(
-    'genetic-drawing - anoparaA genetic algorithm toy project for drawing★ 1286 - Python'
-  );
+  expect(document.querySelectorAll('ul li').length).toBe(2);
+  expect(
+    document.querySelectorAll('div .ant-card-head-title')[0].innerHTML
+  ).toContain(nodeData.name);
+  expect(container).toMatchSnapshot();
 });

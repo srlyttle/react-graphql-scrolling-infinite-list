@@ -1,0 +1,15 @@
+@import '~antd/dist/antd.css';
+
+.header-light {
+  min-height: 5rem;
+  .logo {
+    display: flex;
+
+    .app-logo {
+      max-width: 10rem;
+    }
+    .logo-text {
+      align-items: baseline;
+    }
+  }
+}
