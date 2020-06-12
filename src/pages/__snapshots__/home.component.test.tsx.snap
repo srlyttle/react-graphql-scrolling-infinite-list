@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders without error and shows loading indicator 1`] = `
+exports[`<HomePage/> input filter text and verify results are shown correctly 1`] = `
 <div>
   <div
     class="home-page"
@@ -43,16 +43,17 @@ exports[`renders without error and shows loading indicator 1`] = `
         >
           <input
             class="ant-input"
+            data-testid="search-home"
             placeholder="input search loading with enterButton"
             type="text"
-            value=""
+            value="xgenecloud"
           />
           <span
             class="ant-input-suffix"
           >
             <span
               aria-label="close-circle"
-              class="anticon anticon-close-circle ant-input-clear-icon ant-input-clear-icon-hidden"
+              class="anticon anticon-close-circle ant-input-clear-icon"
               role="button"
               tabindex="-1"
             >
@@ -107,76 +108,6 @@ exports[`renders without error and shows loading indicator 1`] = `
     <ul
       class="repository-list"
     >
-      <div>
-        <li>
-          <div
-            class="ant-card ant-card-bordered"
-          >
-            <div
-              class="ant-card-head"
-            >
-              <div
-                class="ant-card-head-wrapper"
-              >
-                <div
-                  class="ant-card-head-title"
-                >
-                  genetic-drawing - anopara
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-card-body"
-            >
-              <div
-                class="ant-card ant-card-bordered ant-card-type-inner"
-              >
-                <div
-                  class="ant-card-head"
-                >
-                  <div
-                    class="ant-card-head-wrapper"
-                  >
-                    <div
-                      class="ant-card-head-title"
-                    >
-                      A genetic algorithm toy project for drawing
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="ant-card-body"
-                >
-                  Python
-                </div>
-              </div>
-              <div
-                class="ant-card ant-card-bordered ant-card-type-inner"
-                style="margin-top: 16px;"
-              >
-                <div
-                  class="ant-card-head"
-                >
-                  <div
-                    class="ant-card-head-wrapper"
-                  >
-                    <div
-                      class="ant-card-head-title"
-                    >
-                      Stars
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="ant-card-body"
-                >
-                  1286
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </div>
       <div>
         <li>
           <div
@@ -252,7 +183,7 @@ exports[`renders without error and shows loading indicator 1`] = `
 </div>
 `;
 
-exports[`renders without error and shows loading indicator 2`] = `
+exports[`<HomePage/> renders without error and shows loading indicator 1`] = `
 <div>
   <div
     class="home-page"
@@ -295,6 +226,7 @@ exports[`renders without error and shows loading indicator 2`] = `
         >
           <input
             class="ant-input"
+            data-testid="search-home"
             placeholder="input search loading with enterButton"
             type="text"
             value=""

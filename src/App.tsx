@@ -11,22 +11,19 @@ function App() {
     <>
       <Layout className="layout">
         <Header className="header-light">
-       
           <div className="logo">
-          <img src={logo} className="app-logo" alt="logo" />
-          <div className="logo-text"> Trends</div> 
-            
-            </div>
+            <img src={logo} className="app-logo" alt="logo" />
+            <div className="logo-text"> Trends</div>
+          </div>
           <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={['1']}
           ></Menu>
         </Header>
-        <Content style={{ padding: '0 50px', minHeight:'90vh' }}>
+        <Content style={{ padding: '0 50px', minHeight: '90vh' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-           
           </Breadcrumb>
           <div className="site-layout-content">
             <Switch>

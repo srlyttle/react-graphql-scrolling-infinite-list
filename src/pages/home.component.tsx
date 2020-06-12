@@ -97,6 +97,7 @@ const Home: FunctionComponent = () => {
       />
       <div className="home-search"></div>
       <Search
+        data-testid="search-home"
         placeholder="input search loading with enterButton"
         loading={networkStatus === 3}
         enterButton

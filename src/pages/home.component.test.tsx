@@ -6,7 +6,7 @@ import {
 } from '../apollo-client/queries/trendingRespositories';
 import { MockedProvider } from '@apollo/react-testing';
 import { SearchData, RepositoryDetails } from '../models/common';
-import { act, render } from '@testing-library/react';
+import { act, render, fireEvent } from '@testing-library/react';
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
@@ -81,20 +81,41 @@ async function wait(ms = 0) {
     });
   });
 }
+describe('<HomePage/>', () => {
+  test('renders without error and shows loading indicator', async () => {
+    const { container } = render(
+      <MockedProvider addTypename={true} mocks={MOCKS}>
+        <Home />
+      </MockedProvider>
+    );
+    expect(container.textContent).toBe('Loading data...');
 
-it('renders without error and shows loading indicator', async () => {
-  const { container } = render(
-    <MockedProvider addTypename={true} mocks={MOCKS}>
-      <Home />
-    </MockedProvider>
-  );
-  expect(container.textContent).toBe('Loading data...');
+    await wait();
 
-  await wait();
+    expect(document.querySelectorAll('ul li').length).toBe(2);
+    expect(
+      document.querySelectorAll('div .ant-card-head-title')[0].innerHTML
+    ).toContain(nodeData.name);
+    expect(container).toMatchSnapshot();
+  });
 
-  expect(document.querySelectorAll('ul li').length).toBe(2);
-  expect(
-    document.querySelectorAll('div .ant-card-head-title')[0].innerHTML
-  ).toContain(nodeData.name);
-  expect(container).toMatchSnapshot();
+  test('input filter text and verify results are shown correctly', async () => {
+    const { getByTestId, container } = render(
+      <MockedProvider addTypename={true} mocks={MOCKS}>
+        <Home />
+      </MockedProvider>
+    );
+    expect(container.textContent).toBe('Loading data...');
+
+    await wait();
+    expect(document.querySelectorAll('ul li').length).toBe(2);
+    const input = getByTestId('search-home');
+    fireEvent.change(input, { target: { value: 'xgenecloud' } });
+    wait();
+    expect(document.querySelectorAll('ul li').length).toBe(1);
+    expect(
+      document.querySelectorAll('div .ant-card-head-title')[0].innerHTML
+    ).toContain(nodeData2.name);
+    expect(container).toMatchSnapshot();
+  });
 });
